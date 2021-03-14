@@ -2,10 +2,11 @@
 import './App.css';
 import React,{ useState } from 'react';
 
-function Tasks({ task }) {
+function Tasks({ task,index,completeTask }) {
   return (
     <div className="task"  style={{textDecoration: task.completed?"line-through":" "}}>
       {task.title}
+      <button onClick={() => completeTask(index)}>Completed</button>
     </div>
   )
 }
@@ -53,6 +54,12 @@ const addtask=title=>{
   const newtask=[...tasks,{title,completed:false}];
   settasks(newtask);
 }
+const completeTask=index=>{
+  const newtasks=[...tasks];
+  newtasks[index].completed=true;
+  settasks(newtasks);
+
+}
 
   return (
     <div className="to-do-container">
@@ -63,6 +70,7 @@ const addtask=title=>{
             <Tasks
                   task={task}
                   index={index}
+                  completeTask={completeTask}
                   key={index}
 
             
