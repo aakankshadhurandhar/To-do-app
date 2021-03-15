@@ -2,11 +2,12 @@
 import './App.css';
 import React,{ useState } from 'react';
 
-function Tasks({ task,index,completeTask }) {
+function Tasks({ task,index,completeTask,removeTask }) {
   return (
     <div className="task"  style={{textDecoration: task.completed?"line-through":" "}}>
       {task.title}
       <button onClick={() => completeTask(index)}>Completed</button>
+      <button onClick={()=>removeTask(index)}>Remove</button>
     </div>
   )
 }
@@ -60,6 +61,12 @@ const completeTask=index=>{
   settasks(newtasks);
 
 }
+const removeTask=index=> {
+  const newtasks=[...tasks];
+  newtasks.splice(index,1);
+  settasks(newtasks);
+
+}
 
   return (
     <div className="to-do-container">
@@ -71,6 +78,7 @@ const completeTask=index=>{
                   task={task}
                   index={index}
                   completeTask={completeTask}
+                  removeTask={removeTask}
                   key={index}
 
             
